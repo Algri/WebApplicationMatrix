@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -73,17 +73,12 @@ namespace WebApplicationMatrix.Models
         public bool ParserInputData()
         {
             if (String.IsNullOrEmpty(Input)) { Error.Add("Input field is empty"); return false; }
-                
+
             string[] value = Input.Replace(" ", "").Split("\r\n");
 
             foreach (var item in value)
             {
-                bool success = Int32.TryParse(item, out int number);
-                if (success)
-                {
-                    RowParserStr.Add(item);
-                }
-                else { Error.Add("The matrix must contain only 0 and 1"); return false; }
+                RowParserStr.Add(item);
             }
             return true;
         }
@@ -155,7 +150,7 @@ namespace WebApplicationMatrix.Models
 
         private int[,] FillTemplateMatrix(int[,] matrix)
         {
-            // Получить количество столбцов
+            // Get the number of columns
             int center = matrix.GetLength(0) / 2;
             for (int y = 0; y < matrix.GetLength(1); y++)
             {
@@ -190,15 +185,10 @@ namespace WebApplicationMatrix.Models
                             fragmentSearchMatrix[y, x] = data[y + dY, x + dX];
                         }
                     }
-
-                    // Проверка
-                    //n++;
-                    //Console.WriteLine(n);
-                    //Print(fragmentSearchMatrix);
+                    
                     bool eq = IsEqualMatrix(fragmentSearchMatrix, searchPattern);
                     if (eq)
                         n++;
-
                     dX++;
                 }
                 dY++; dX = 0;
