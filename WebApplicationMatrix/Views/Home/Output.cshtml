@@ -1,0 +1,47 @@
+﻿@model WebApplicationMatrix.Models.Data
+
+@{
+    ViewData["Title"] = "Output";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Output", "Home", FormMethod.Post))
+{
+    <div>
+        <hr />
+        <div class="form-group">
+            <h3>@Html.LabelFor(l => l.Input)</h3>
+            <div style="font-family: monospace">
+                @Html.TextAreaFor(m => m.Input, new { @class = "form-control", rows = "20" })
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Отправить" class="btn-primary" />
+    </div>
+    <div>
+        @{
+            if (Model.Error.Count == 0)
+            {
+                <br />
+                <h3>Output:</h3>
+                <h3>@ViewData["Output"]</h3>
+            }
+            else
+            {
+                <div style="color: orangered">
+                    <br />
+                    <h3>Error input:</h3>
+                    @foreach (var item in Model.Error)
+                    {                        
+                        <ul>                            
+                            <li>
+                                @Html.Label(item);
+                            </li>
+                        </ul>
+                    }                            
+                </div>
+            }
+        }
+    </div>
+}

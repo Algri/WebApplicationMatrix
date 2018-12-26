@@ -1,0 +1,23 @@
+﻿@model WebApplicationMatrix.Models.Data
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Output", "Home", FormMethod.Post))
+{
+    <div>
+        <hr />
+        <div class="form-group">           
+            <h3>@Html.LabelFor(l => l.Input)</h3>
+            <div style="font-family: monospace">
+                @Html.TextAreaFor(m => m.Input, new { @class = "form-control", rows = "20" })
+            </div>
+        </div>
+        
+    </div>
+    <div>
+        <input type="submit" value="Отправить" class="btn-primary" />
+    </div>
+}
